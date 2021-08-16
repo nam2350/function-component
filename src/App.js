@@ -1,22 +1,20 @@
-import React from 'react'
-import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset'
-import Counter from './Counter';
-import LoginJH from './Component/Jaehyun/LoginJH';
+import React from "react";
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+
+import LoginJM from "./Component/Jungmin/LoginJM";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
   
-`
+`;
 const App = () => {
-  
-
   return (
     <div>
-      <GlobalStyle/>
-      <LoginJH/>
+      <GlobalStyle />
+      <LoginJM />
     </div>
   );
-}
+};
 
-export default App
+export default App;
