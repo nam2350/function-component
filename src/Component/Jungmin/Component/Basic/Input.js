@@ -1,26 +1,20 @@
 import React from "react";
-import styled from "styled-components";
 
-const Input = ({ name, type, placeholder, handleInput }) => {
+const Input = ({ name, type, placeholder, handleInput, className }) => {
   const handle = (e) => {
     const { name, value } = e.target;
-
     handleInput(name, value);
   };
 
   return (
-    <InputStyle
+    <input
+      className={className}
       name={name}
       type={type}
       placeholder={placeholder}
       onChange={handle}
-    />
+    ></input>
   );
 };
 
 export default Input;
-
-const InputStyle = styled.input`
-  padding: 10px;
-  margin: 10px;
-`;

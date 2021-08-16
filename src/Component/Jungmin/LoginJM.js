@@ -4,13 +4,13 @@ import Input from "./Component/Basic/Input";
 import Button from "./Component/Basic/Button";
 
 const LoginJM = () => {
-  const [from, setFrom] = useState({});
+  const [form, setForm] = useState({});
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(from);
+    console.log(form);
   };
   const handleInput = (name, value) => {
-    setFrom((prev) => {
+    setForm((prev) => {
       return { ...prev, [name]: value };
     });
   };
@@ -20,7 +20,7 @@ const LoginJM = () => {
       <InputContainer onSubmit={handleOnSubmit}>
         {inputBox.map(({ name, type, placeholder, id }) => {
           return (
-            <Input
+            <InputStyle
               key={id}
               name={name}
               type={type}
@@ -34,6 +34,12 @@ const LoginJM = () => {
     </Login>
   );
 };
+
+const InputStyle = styled(Input)`
+  border: 1px solid red;
+  padding: 10px;
+  margin: 10px;
+`;
 
 const InputContainer = styled.form`
   display: flex;
