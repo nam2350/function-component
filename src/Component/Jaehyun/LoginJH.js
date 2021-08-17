@@ -1,40 +1,70 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Input from "./Input";
+import { InputType } from "./InputType";
+import KakaoLogin from "react-kakao-login";
 
 const LoginJH = () => {
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
 
-  const [id, setId] = useState('')
-  const [pw, setPw] = useState('')
-
-  const handleInput = ({target}) => {
-    const{name,value}=target
-    if(name === 'id'){
-      setId(value)
+  const handleInput = ({ target }) => {
+    const { name, value } = target;
+    if (name === "id") {
+      setId(value);
     }
-    if(name === 'pw') {
-      setPw(value)
+    if (name === "pw") {
+      setPw(value);
     }
-  }
+  };
 
   const login = (e) => {
-    e.preventDefalut();
-    console.log('id :', id, 'pw :', pw)
-  }
+    e.preventDefault();
+    console.log("id :", id, "pw :", pw);
+    // alert("로그인 되었습니다");
+  };
 
-  return <Wrapper>
-    <InputContainer onSubmit={(e)=>{e.preventDefalut()}}>
-      <Input name="id" type="text" placeholder="id를 입력하세요" onChange={handleInput}></Input>
-      <Input name="pw" type="password" placeholder="비밀번호를 입력하세요" onChange={handleInput}></Input>
-      <Button type="primary" onClick={login}>로그인</Button>
-    </InputContainer>
-  </Wrapper>;
+  const deleteToken = () => {
+    localStorage.removeItem("Kakao_token");
+  };
+  const resKakao = (res) => {
+    console.log("들어옴");
+    const data = res;
+    console.log(data);
+  };
+
+  return (
+    <Wrapper>
+      <InputContainer onSubmit={login}>
+        {InputType.map(({ id, name, type, placeholder }) => {
+          return (
+            <InputH
+              key={id}
+              name={name}
+              type={type}
+              placeholder={placeholder}
+              onchange={handleInput}
+            />
+          );
+        })}
+
+        <Button type="submit">로그인</Button>
+      </InputContainer>
+      <KakaoLogin
+        jskey={"10e8dcc486572652a0f2a25019a84e26"}
+        buttonText=""
+        onSuccess={resKakao}
+      />
+      <button onClick={deleteToken}>토큰삭제</button>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   text-align: center;
-`
+`;
 const InputContainer = styled.form`
   display: flex;
   flex-direction: column;
@@ -44,12 +74,12 @@ const InputContainer = styled.form`
   margin-top: 100px;
   border: 1px solid lightgray;
   padding: 50px;
-`
-const Input = styled.input`
+`;
+const InputH = styled(Input)`
   width: 300px;
   height: 30px;
   margin-bottom: 20px;
-`
+`;
 
 const Button = styled.button`
   width: 300px;
@@ -59,6 +89,5 @@ const Button = styled.button`
   background-color: #1790ff;
   border: none;
   outline: none;
-
-`
+`;
 export default LoginJH;
