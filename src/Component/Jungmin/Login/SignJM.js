@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import InputContainer from "../Component/Basic/InputContainer";
 
-const LoginJM = () => {
+const SignJM = () => {
   const [form, setForm] = useState({});
   const [Sign, setSign] = useState(true);
 
@@ -113,4 +113,4 @@ const signupButton = [
   },
 ];
 
-export default LoginJM;
+export default SignJM;
