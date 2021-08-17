@@ -68,11 +68,13 @@ const KakaoLogin = () => {
         name="kakao"
         onClick={handlelogin}
         src="/images/kakao_login_medium.png"
+        alt="카카오"
       ></img>
       <img
         name="kakao"
         onClick={handlelogout}
         src="/images/kakao_login_medium.png"
+        alt="로그아웃"
       ></img>
     </>
   );
