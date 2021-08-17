@@ -5,6 +5,18 @@ import React, { useState, useEffect } from "react";
 const KakaoLogin = () => {
   const { Kakao } = window;
   // const [Login, setLogin] = useState();
+  const handlelogout = () => {
+    console.log("로그아웃 버튼을 눌러써!");
+    Kakao.API.request({
+      url: "/v1/user/unlink",
+      success: function (response) {
+        console.log("성공", response);
+      },
+      fail: function (error) {
+        console.log(error);
+      },
+    });
+  };
 
   const handlelogin = () => {
     Kakao.Auth.login({
@@ -21,7 +33,8 @@ const KakaoLogin = () => {
         //   .then((res) => res.json())
         //   .then((res) => {
         //     if (res) {
-
+        // Kakao.Auth.logout();
+        // localStorage.setItem("token", res);
         //       console.log(res);
         //     }
         //   });
@@ -50,11 +63,18 @@ const KakaoLogin = () => {
   }, []);
 
   return (
-    <img
-      name="kakao"
-      onClick={handlelogin}
-      src="/images/kakao_login_medium.png"
-    ></img>
+    <>
+      <img
+        name="kakao"
+        onClick={handlelogin}
+        src="/images/kakao_login_medium.png"
+      ></img>
+      <img
+        name="kakao"
+        onClick={handlelogout}
+        src="/images/kakao_login_medium.png"
+      ></img>
+    </>
   );
 };
 
