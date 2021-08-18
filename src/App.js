@@ -1,7 +1,7 @@
 import React from "react";
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-import SignJM from "./Component/Jungmin/Login/SignJM";
+import { Link } from "react-router-dom";
 import KakaoLogin from "./Component/Jungmin/Login/KakaoLogin";
 
 const GlobalStyle = createGlobalStyle`
@@ -10,12 +10,19 @@ const GlobalStyle = createGlobalStyle`
 `;
 const App = () => {
   return (
-    <div>
+    <>
       <GlobalStyle />
-      <SignJM />
-      <KakaoLogin />
-    </div>
+      <Wrapper>
+        <Link to="/kakaologin">카카오로그인</Link>
+      </Wrapper>
+    </>
   );
 };
 
 export default App;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
