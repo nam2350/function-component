@@ -23,21 +23,6 @@ const KakaoLogin = () => {
       scope: "profile_nickname, account_email",
       success: function (response) {
         console.log(response);
-        // fetch(`{우리 패치 유알엘}`, {
-        //   ,
-        //   method: "POST",
-        //   headers: {
-        //     Authorization: response.access_token,
-        //   },
-        // })
-        //   .then((res) => res.json())
-        //   .then((res) => {
-        //     if (res) {
-        // Kakao.Auth.logout();
-        // localStorage.setItem("token", res);
-        //       console.log(res);
-        //     }
-        //   });
       },
       fail: function (error) {
         alert("로그인에 실패했습니다.");
