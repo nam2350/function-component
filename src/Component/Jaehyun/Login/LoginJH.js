@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Input from "./Input";
 import { InputType } from "./InputType";
-import KakaoLogin from "react-kakao-login";
 
 const LoginJH = () => {
   const [id, setId] = useState("");
@@ -50,11 +49,7 @@ const LoginJH = () => {
 
         <Button type="submit">로그인</Button>
       </InputContainer>
-      <KakaoLogin
-        jskey={"10e8dcc486572652a0f2a25019a84e26"}
-        buttonText=""
-        onSuccess={resKakao}
-      />
+
       <button onClick={deleteToken}>토큰삭제</button>
     </Wrapper>
   );
