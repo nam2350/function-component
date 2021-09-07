@@ -1,73 +1,78 @@
-import React, { useRef } from "react";
-import DaumPostcode from "react-daum-postcode";
+import React, { useState, useEffect } from "react";
+// import NaverLogin from "react-naver-login";
+import KakaoLogin from "react-kakao-login";
+import NaverLogin from "./NaverLogin/NaverLogin";
+import axios from "axios";
 
-const DaumPostLibray = () => {
-  const addrInput = useRef("");
-  let detailInput = useRef("");
-  const zonecodeInput = useRef("");
-  const finish = useRef("");
+const LibraryTest = () => {
+  useEffect(() => {
+    // console.log(
+    //   "현재토큰 네이버",
+    //   localStorage.getItem("com.naver.nid.oauth.state_token")
+    // );
+  }, []);
+  const _clickSnsLoginKakao = (e) => {
+    const data = e.response;
+    let kakaoid = e.profile.id; // 카카오에서 제공한 ID
+    // console.log("로그인된 카카오 아이디", e);
+    console.log("로그인된 카카오 토큰", data.access_token);
+    // const headers = { Autorization: data.access_token };
+    axios
+      .post("http://10.58.4.228:8000/users/kakao", {
+        headers: {
+          Authorization: data.access_token,
+        },
+      })
+      .then((res) => {
+        console.log("backend response 값!!", res);
+      });
+  };
+  // const _clickSnsLoginNaver = (e) => {
+  //   let naverid = e.id; // 네이버에서 제공한 ID
+  //   console.log("로그인된 네이버 아이디", e);
 
-  const handleComplete = (data) => {
-    console.log("data", data);
-    let fullAddress = data.address;
-    let zonecode = data.zonecode;
-    addrInput.current.value = fullAddress;
-    zonecodeInput.current.value = zonecode;
-  };
-
-  const detailAddr = (e) => {
-    detailInput.current.value = e.target.value;
-  };
-  const handleAddress = () => {
-    finish.current.value =
-      addrInput.current.value + " " + detailInput.current.value;
-  };
+  //   axios
+  //     .post("http://10.58.4.228:8000/users/naver", {
+  //       headers: {
+  //         Autorization: localStorage.getItem("com.naver.nid.oauth.state_token"),
+  //       },
+  //     })
+  //     .then((res) => console.log("backend response 값!!", res));
+  // };
 
   return (
-    <>
-      <DaumPostcode
-        onComplete={handleComplete}
-        autoClose={true}
-        autoResize={true}
+    <div>
+      {/* <NaverLogin
+        clientId={"5blOgkIHjJNGxAmqca7a"}
+        callbackUrl="http://localhost:3000/test"
+        render={(renderProps) => (
+          <div
+            id="naverIdLogin"
+            onClick={renderProps.onClick}
+            disabled={renderProps.disabled}
+          ></div>
+        )}
+        onSuccess={(e) => _clickSnsLoginNaver(e)}
+        onFailure={(result) => console.error(result)}
+        onClick={_clickSnsLoginNaver}
+      /> */}
+      <NaverLogin />
+      <br />
+      <br />
+      <br />
+      <KakaoLogin
+        token={"18887ba3ce1940d9352948b871d3df51"}
+        render={(renderProps) => (
+          <div onClick={renderProps.onClick} disabled={renderProps.disabled}>
+            <button>카카오 로그인</button>
+          </div>
+        )}
+        onSuccess={(e) => _clickSnsLoginKakao(e)}
+        onFail={console.error}
+        onLogout={console.info}
       />
-      <div style={{ marginTop: "50px", marginLeft: "20px" }}>
-        우편번호 :
-        <input
-          type="text"
-          style={{ width: "100px", height: "30px" }}
-          ref={zonecodeInput}
-        />
-      </div>
-      <div style={{ marginTop: "50px", marginLeft: "50px" }}>
-        주소 :
-        <input
-          type="text"
-          style={{ width: "500px", height: "30px", marginLeft: "30px" }}
-          ref={addrInput}
-        />
-        <div style={{ marginTop: "20px" }}>
-          상세주소 :
-          <input
-            type="text"
-            style={{ width: "300px", height: "30px" }}
-            onChange={detailAddr}
-            ref={detailInput}
-          />
-        </div>
-        <div>
-          <button onClick={handleAddress}> 입력하기 </button>
-        </div>
-      </div>
-      <div style={{ margin: "200px 0 0 500px" }}>
-        <input
-          className="fullAddress"
-          type="text"
-          style={{ width: "500px", height: "30px" }}
-          ref={{ finish }}
-        />
-      </div>
-    </>
+    </div>
   );
 };
 
-export default DaumPostLibray;
+export default LibraryTest;

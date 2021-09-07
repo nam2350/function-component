@@ -26,11 +26,11 @@ const LoginJH = () => {
   const deleteToken = () => {
     localStorage.removeItem("Kakao_token");
   };
-  const resKakao = (res) => {
-    console.log("들어옴");
-    const data = res;
-    console.log(data);
-  };
+  // const resKakao = (res) => {
+  //   console.log("들어옴");
+  //   const data = res;
+  //   console.log(data);
+  // };
 
   return (
     <Wrapper>
